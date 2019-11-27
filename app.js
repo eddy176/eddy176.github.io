@@ -1,5 +1,5 @@
 
-
+var BASE_URL = "https://my-workout-planner.herokuapp.com";
 //add button and text box to send workouts to server
 var addButton = document.querySelector("#add"); //create add button so users can add workouts
 addButton.onclick = function () {
@@ -15,7 +15,7 @@ addButton.onclick = function () {
     bodystr += "&tut=" + encodeURIComponent(newWorkoutTut);
     bodystr += "&rest=" + encodeURIComponent(newWorkoutRest);
 
-    fetch("http://localhost:8080/workouts", {
+    fetch( BASE_URL + "/workouts", {
         method: "POST",
         body: bodystr,
         headers: {
@@ -44,7 +44,7 @@ updateWorkoutbutton.onclick = function () {
     bodystr += "&rest=" + encodeURIComponent(newWorkoutRest);
     console.log("bodystring", bodystr);
     
-    fetch("http://localhost:8080/workouts/" + workoutid, {
+    fetch( BASE_URL + "/workouts/" + workoutid, {
         method: "PUT",
         body: bodystr,
               headers: {
@@ -57,7 +57,7 @@ updateWorkoutbutton.onclick = function () {
 
 
 var deleteWorkout = function (workoutId) {
-  fetch("http://localhost:8080/workouts/" + workoutId, {
+  fetch( BASE_URL + "/workouts/" + workoutId, {
       method: "DELETE",
       headers: {
         "Content-Type" : "application/x-www-form-urlencoded"
@@ -67,7 +67,7 @@ var deleteWorkout = function (workoutId) {
 };
 
 function getWorkouts () {
-    fetch("http://localhost:8080/workouts").then(function (response) {
+    fetch(BASE_URL + "/workouts").then(function (response) {
         response.json().then(function (data) {
           console.log("data received from server:", data);
           
@@ -149,7 +149,7 @@ function getWorkouts () {
 
 var getWorkout = function (workoutId) {
 
-  fetch("http://localhost:8080/workouts/" + workoutId).then(function (response) {
+  fetch(BASE_URL + "/workouts/" + workoutId).then(function (response) {
   response.json().then(function (data) { 
     var updateWorkoutId = document.querySelector("#update-workout-id");
     var updateWorkoutName = document.querySelector("#update-workout-name");
